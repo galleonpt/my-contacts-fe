@@ -11,12 +11,17 @@ function ContactForm({ buttonLabel }) {
       <FormGroup>
         <Input placeholder="Nome" />
       </FormGroup>
-      <FormGroup>
-        <Input placeholder="Email" />
+
+      <FormGroup
+        error="Formato de email inválido"
+      >
+        <Input placeholder="Email" error />
       </FormGroup>
+
       <FormGroup>
         <Input placeholder="Telemovel" />
       </FormGroup>
+
       <FormGroup>
         <Select>
           <option value="instagram">Instagram</option>
