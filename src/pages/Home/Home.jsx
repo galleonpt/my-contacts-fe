@@ -10,7 +10,7 @@ import Modal from '../../components/Modal/Modal';
 function Home() {
   return (
     <Container>
-      <Modal />
+      <Modal danger />
 
       <InputSearchContainer>
         <input type="text" placeholder="Pesquisar contacto ..." />

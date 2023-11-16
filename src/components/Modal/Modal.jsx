@@ -1,17 +1,18 @@
+import PropTypes from 'prop-types';
 import { Overlay, Container, Footer } from './styles';
 import Button from '../Button';
 
-function Modal() {
+function Modal({ danger }) {
   return (
     <Overlay>
-      <Container>
+      <Container danger={danger}>
         <h1>titulo</h1>
         <p>description</p>
 
         <Footer>
           <button type="button" className="cancel_btn">Cancelar</button>
 
-          <Button type="button">Apagar</Button>
+          <Button type="button" danger={danger}>Apagar</Button>
         </Footer>
       </Container>
     </Overlay>
@@ -19,3 +20,11 @@ function Modal() {
 }
 
 export default Modal;
+
+Modal.propTypes = {
+  danger: PropTypes.bool,
+};
+
+Modal.defaultProps = {
+  danger: false,
+};
