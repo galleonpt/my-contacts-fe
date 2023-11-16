@@ -1,17 +1,16 @@
 import PageHeader from '../../components/PageHeader/PageHeader';
 import ContactForm from '../../components/ContactForm/ContactForm';
 
-function NewContact() {
+function Edit() {
   return (
     <>
       <PageHeader
-        title="Novo contacto"
+        title="Editar XPTO"
       />
 
-      <ContactForm buttonLabel="Criar contacto" />
-
+      <ContactForm buttonLabel="Guardar alterações" />
     </>
   );
 }
 
-export default NewContact;
+export default Edit;

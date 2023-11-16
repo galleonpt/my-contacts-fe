@@ -1,7 +1,7 @@
 import { Switch, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import NewContact from './pages/NewContact/NewContact';
-import Edit from './pages/Edit/Edit';
+import Edit from './pages/EditContact/EditContact';
 
 function Routes() {
   return (
