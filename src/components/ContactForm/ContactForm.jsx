@@ -6,26 +6,28 @@ import FormGroup from '../FormGroup/FormGroup';
 import Input from '../Input';
 import Select from '../Select';
 import Button from '../Button';
+import useErrors from '../../hooks/useErrors';
 
 function ContactForm({ buttonLabel }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [category, setCategory] = useState('');
-  const [errors, setErrors] = useState([]);
+
+  const {
+    getErrorByField, removeError, setError,
+  } = useErrors();
 
   const handleNameChange = (event) => {
     setName(event.target.value);
 
     if (!event.target.value) {
-      setErrors((prevState) => [
-        ...prevState,
-        { field: 'name', message: 'Name is required' },
-      ]);
+      setError({
+        field: 'name',
+        message: 'Name is required!',
+      });
     } else {
-      setErrors((prevState) => prevState.filter(
-        (error) => error.field !== 'name',
-      ));
+      removeError('name');
     }
   };
 
@@ -33,22 +35,13 @@ function ContactForm({ buttonLabel }) {
     setEmail(event.target.value);
 
     if (event.target.value && !isEmailValid(event.target.value)) {
-      const errorAlreadExist = errors.find((error) => error.field === 'email');
-
-      if (errorAlreadExist) return;
-
-      setErrors((prevState) => [
-        ...prevState,
+      setError(
         { field: 'email', message: 'Invalid email' },
-      ]);
+      );
     } else {
-      setErrors((prevState) => prevState.filter(
-        (error) => error.field !== 'email',
-      ));
+      removeError('email');
     }
   };
-
-  const getErrorByField = (field) => errors.find((error) => error.field === field)?.message;
 
   const handleSubmit = (event) => {
     event.preventDefault();
