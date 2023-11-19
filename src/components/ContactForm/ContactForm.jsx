@@ -48,7 +48,7 @@ function ContactForm({ buttonLabel }) {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} noValidate>
       <FormGroup error={getErrorByField('name')}>
         <Input
           value={name}
@@ -60,6 +60,7 @@ function ContactForm({ buttonLabel }) {
 
       <FormGroup error={getErrorByField('email')}>
         <Input
+          type="email"
           value={email}
           placeholder="Email"
           error={getErrorByField('email')}
