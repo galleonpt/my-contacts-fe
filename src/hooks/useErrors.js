@@ -23,7 +23,7 @@ const useErrors = () => {
   const getErrorByField = (field) => errors.find((error) => error.field === field)?.message;
 
   return {
-    setError, removeError, getErrorByField,
+    errors, setError, removeError, getErrorByField,
   };
 };
 
