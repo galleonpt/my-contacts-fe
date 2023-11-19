@@ -11,8 +11,26 @@ function ContactForm({ buttonLabel }) {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [category, setCategory] = useState('');
+  const [errors, setErrors] = useState([]);
 
-  function handleSubmit(event) {
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+
+    if (!event.target.value) {
+      setErrors((prevState) => [
+        ...prevState,
+        { field: 'name', message: 'Name is required' },
+      ]);
+    } else {
+      setErrors((prevState) => prevState.filter(
+        (error) => error.field !== 'name',
+      ));
+    }
+  };
+
+  console.log(errors);
+
+  const handleSubmit = (event) => {
     event.preventDefault();
     console.log(
       name,
@@ -20,15 +38,15 @@ function ContactForm({ buttonLabel }) {
       phone,
       category,
     );
-  }
+  };
 
   return (
-    <Form onSubmit={(event) => handleSubmit(event)}>
+    <Form onSubmit={handleSubmit}>
       <FormGroup>
         <Input
           value={name}
-          placeholder="Nome"
-          onChange={(event) => setName(event.target.value)}
+          placeholder="Name"
+          onChange={handleNameChange}
         />
       </FormGroup>
 
@@ -43,7 +61,7 @@ function ContactForm({ buttonLabel }) {
       <FormGroup>
         <Input
           value={phone}
-          placeholder="Telemovel"
+          placeholder="Phone"
           onChange={(event) => setPhone(event.target.value)}
         />
       </FormGroup>
