@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import {
-  Container, Header, ListContainer, Card, InputSearchContainer,
+  Container, Header, ListHeader, Card, InputSearchContainer,
 } from './styles';
 import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
@@ -34,40 +34,38 @@ function Home() {
         <Link to="/new">New contact</Link>
       </Header>
 
-      <ListContainer>
-        <header>
-          <button type="button">
-            <span>Name</span>
+      <ListHeader>
+        <button type="button">
+          <span>Name</span>
 
-            <img src={arrow} alt="Arrow" />
-          </button>
-        </header>
+          <img src={arrow} alt="Arrow" />
+        </button>
+      </ListHeader>
 
-        {
-            contacts.map((contact) => (
-              <Card key={contact.id}>
-                <div className="info">
-                  <div className="contact-name">
-                    <strong>{contact.name}</strong>
-                    { contact.category_name && <small>{contact.category_name}</small> }
-                  </div>
-
-                  <span>{contact.email}</span>
-                  <span>{contact.phone}</span>
+      {
+          contacts.map((contact) => (
+            <Card key={contact.id}>
+              <div className="info">
+                <div className="contact-name">
+                  <strong>{contact.name}</strong>
+                  { contact.category_name && <small>{contact.category_name}</small> }
                 </div>
 
-                <div className="actions">
-                  <Link to={`/edit/${contact.id}`}>
-                    <img src={edit} alt="Edit" />
-                  </Link>
+                <span>{contact.email}</span>
+                <span>{contact.phone}</span>
+              </div>
 
-                  <button type="button"><img src={trash} alt="Delete" /></button>
-                </div>
-              </Card>
-            ))
+              <div className="actions">
+                <Link to={`/edit/${contact.id}`}>
+                  <img src={edit} alt="Edit" />
+                </Link>
+
+                <button type="button"><img src={trash} alt="Delete" /></button>
+              </div>
+            </Card>
+          ))
         }
 
-      </ListContainer>
     </Container>
   );
 }
