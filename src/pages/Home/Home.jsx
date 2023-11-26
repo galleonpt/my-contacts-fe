@@ -9,17 +9,24 @@ import trash from '../../assets/images/icons/trash.svg';
 
 function Home() {
   const [contacts, setContacts] = useState([]);
+  const [orderBy, setOrderBy] = useState('asc');
 
   // ! effects
   useEffect(() => {
-    fetch('http://localhost:3333/contacts')
+    fetch(`http://localhost:3333/contacts?orderBy=${orderBy}`)
       .then(async (response) => {
         const json = await response.json();
         setContacts(json);
       })
       .catch((error) => { console.log('error', error); });
-  }, []);
+  }, [orderBy]);
 
+  // ! handlers
+  const handleToggleOrderBy = () => {
+    setOrderBy((prev) => (prev === 'asc' ? 'desc' : 'asc'));
+  };
+
+  // ! render
   return (
     <Container>
       <InputSearchContainer>
@@ -34,8 +41,8 @@ function Home() {
         <Link to="/new">New contact</Link>
       </Header>
 
-      <ListHeader>
-        <button type="button">
+      <ListHeader orderBy={orderBy}>
+        <button type="button" onClick={handleToggleOrderBy}>
           <span>Name</span>
 
           <img src={arrow} alt="Arrow" />
