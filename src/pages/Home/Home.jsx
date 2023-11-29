@@ -20,14 +20,21 @@ function Home() {
 
   // ! effects
   useEffect(() => {
-    setIsLoading(true);
-    fetch(`http://localhost:3333/contacts?orderBy=${orderBy}`)
-      .then(async (response) => {
+    async function fetchContacts() {
+      try {
+        setIsLoading(true);
+
+        const response = await fetch(`http://localhost:3333/contacts?orderBy=${orderBy}`);
         const json = await response.json();
         setContacts(json);
-      })
-      .catch((error) => { console.log('error', error); })
-      .finally(() => setIsLoading(false));
+      } catch (error) {
+        console.log('error', error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchContacts();
   }, [orderBy]);
 
   // ! handlers
