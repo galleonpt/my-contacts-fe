@@ -1,29 +1,33 @@
+import { useEffect, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 import {
   Container, Header, ListHeader, Card, InputSearchContainer,
 } from './styles';
 import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
+import Loader from '../../components/Loader/Loader';
 
 function Home() {
   const [contacts, setContacts] = useState([]);
   const [orderBy, setOrderBy] = useState('asc');
   const [searchName, setSearchName] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
-  const filteredContacts = contacts.filter((contact) => (
+  const filteredContacts = useMemo(() => contacts.filter((contact) => (
     contact.name.toLowerCase().includes(searchName.toLowerCase())
-  ));
+  )), [searchName, contacts]);
 
   // ! effects
   useEffect(() => {
+    setIsLoading(true);
     fetch(`http://localhost:3333/contacts?orderBy=${orderBy}`)
       .then(async (response) => {
         const json = await response.json();
         setContacts(json);
       })
-      .catch((error) => { console.log('error', error); });
+      .catch((error) => { console.log('error', error); })
+      .finally(() => setIsLoading(false));
   }, [orderBy]);
 
   // ! handlers
@@ -38,6 +42,8 @@ function Home() {
   // ! render
   return (
     <Container>
+      {isLoading && <Loader />}
+
       <InputSearchContainer>
         <input
           value={searchName}
