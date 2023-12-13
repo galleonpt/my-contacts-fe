@@ -5,7 +5,12 @@ class HttpClient {
 
   async get(endpoint) {
     const response = await fetch(`${this.baseUrl}${endpoint}`);
-    return response.json();
+
+    if (response.ok) {
+      return response.json();
+    }
+
+    throw new Error(response.statusText);
   }
 }
 
