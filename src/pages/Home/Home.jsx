@@ -1,14 +1,18 @@
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable no-nested-ternary */
 import {
   useEffect, useState, useMemo, useCallback,
 } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Container, Header, ListHeader, Card, InputSearchContainer, ErrorContainer,
+  Container, Header, ListHeader, Card, InputSearchContainer, ErrorContainer, EmptyListContainer,
 } from './styles';
 import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
 import sad from '../../assets/images/sad.svg';
+import emptyBox from '../../assets/images/empty-box.svg';
 
 import Loader from '../../components/Loader/Loader';
 import Button from '../../components/Button';
@@ -63,17 +67,27 @@ function Home() {
     <Container>
       {isLoading && <Loader />}
 
-      <InputSearchContainer>
-        <input
-          value={searchName}
-          type="text"
-          placeholder="Find Contact ..."
-          onChange={handleChangeSearchName}
-        />
-      </InputSearchContainer>
+      {contacts.length > 0 && (
+        <InputSearchContainer>
+          <input
+            value={searchName}
+            type="text"
+            placeholder="Search contact by name ..."
+            onChange={handleChangeSearchName}
+          />
+        </InputSearchContainer>
+      )}
 
-      <Header hasError={hasError}>
-        {!hasError && (
+      <Header
+        justifyContent={
+            hasError
+              ? 'flex-end'
+              : contacts.length > 0
+                ? 'space-between'
+                : 'center'
+        }
+      >
+        {!hasError && contacts.length > 0 && (
         <strong>
           {filteredContacts.length}
           {filteredContacts.length === 1 ? ' contact' : ' contacts'}
@@ -98,6 +112,21 @@ function Home() {
 
       {!hasError && (
         <>
+          {contacts.length === 0 && !isLoading && (
+          <EmptyListContainer>
+            <img src={emptyBox} alt="empty-box" />
+
+            <div>
+              <p>
+                You don't have any registered contacts yet!
+                Click on the <strong>“New Contact”</strong>
+                button at the top to register your first one!
+              </p>
+            </div>
+          </EmptyListContainer>
+
+          )}
+
           {filteredContacts.length > 0 && (
           <ListHeader orderBy={orderBy}>
             <button type="button" onClick={handleToggleOrderBy}>
