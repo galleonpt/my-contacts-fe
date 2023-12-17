@@ -1,3 +1,5 @@
+import APIError from '../../errors/ApiError';
+
 class HttpClient {
   constructor(baseUrl) {
     this.baseUrl = baseUrl;
@@ -17,7 +19,7 @@ class HttpClient {
       return body;
     }
 
-    throw new Error(body?.error || `${response.status} - ${response.statusText}`);
+    throw new APIError(response, body);
   }
 }
 
