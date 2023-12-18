@@ -149,7 +149,7 @@ export const EmptyListContainer = styled.div`
     flex-direction: column;
     align-items: center;
 
-    p{
+    p {
         color: ${({ theme }) => theme.colors.grey[200]};
         text-align: center;
         margin-top: 8px;
@@ -157,5 +157,17 @@ export const EmptyListContainer = styled.div`
         strong {
             color: ${({ theme }) => theme.colors.primary.main};
         }
+    }
+`;
+
+export const SearchNotFoundContainer = styled.div`
+    margin-top: 16px;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+
+    span {
+        color: ${({ theme }) => theme.colors.grey[200]};
+        word-break: break-word;
     }
 `;

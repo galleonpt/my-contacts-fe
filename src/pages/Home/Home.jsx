@@ -6,13 +6,21 @@ import {
 } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Container, Header, ListHeader, Card, InputSearchContainer, ErrorContainer, EmptyListContainer,
+  Container,
+  Header,
+  ListHeader,
+  Card,
+  InputSearchContainer,
+  ErrorContainer,
+  EmptyListContainer,
+  SearchNotFoundContainer,
 } from './styles';
 import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
 import sad from '../../assets/images/sad.svg';
 import emptyBox from '../../assets/images/empty-box.svg';
+import magnifierQuestion from '../../assets/images/magnifier-question.svg';
 
 import Loader from '../../components/Loader/Loader';
 import Button from '../../components/Button';
@@ -124,7 +132,14 @@ function Home() {
               </p>
             </div>
           </EmptyListContainer>
+          )}
 
+          {contacts.length > 0 && filteredContacts.length === 0 && (
+          <SearchNotFoundContainer>
+            <img src={magnifierQuestion} alt="magnifier-question" />
+
+            <span>No results were found for <strong>{searchName}</strong>.</span>
+          </SearchNotFoundContainer>
           )}
 
           {filteredContacts.length > 0 && (
