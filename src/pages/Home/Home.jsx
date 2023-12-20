@@ -46,7 +46,7 @@ function Home() {
 
       setContacts(contactsList);
       setHasError(false);
-    } catch (error) {
+    } catch {
       setHasError(true);
     } finally {
       setIsLoading(false);

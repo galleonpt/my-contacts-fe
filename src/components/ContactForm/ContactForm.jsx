@@ -20,6 +20,7 @@ function ContactForm({ buttonLabel }) {
   const [phone, setPhone] = useState('');
   const [categoryId, setCategoryId] = useState('');
   const [categories, setCategories] = useState([]);
+  const [isLoadingCategories, setIsLoadingCategories] = useState(true);
 
   const {
     errors, getErrorByField, removeError, setError,
@@ -65,10 +66,11 @@ function ContactForm({ buttonLabel }) {
   useEffect(() => {
     async function fetchCategories() {
       try {
+        setIsLoadingCategories(true);
         const categoriesList = await CategoriesService.list();
         setCategories(categoriesList);
-      } catch (error) {
-        console.log(error);
+      } catch {} finally {
+        setIsLoadingCategories(false);
       }
     }
 
@@ -107,10 +109,11 @@ function ContactForm({ buttonLabel }) {
         />
       </FormGroup>
 
-      <FormGroup>
+      <FormGroup isLoading={isLoadingCategories}>
         <Select
           value={categoryId}
           onChange={(event) => setCategoryId(event.target.value)}
+          disabled={isLoadingCategories}
         >
           <option value="">No category</option>
 
