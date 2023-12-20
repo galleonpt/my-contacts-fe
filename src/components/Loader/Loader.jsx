@@ -1,10 +1,11 @@
 import ReactDom from 'react-dom';
 import { Overlay } from './styles';
+import Spinner from '../Spinner/Spinner';
 
 function Loader() {
   return ReactDom.createPortal(
     <Overlay>
-      <div className="loader" />
+      <Spinner size={90} />
     </Overlay>,
     document.getElementById('loader-root'),
   );
