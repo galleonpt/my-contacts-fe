@@ -56,7 +56,7 @@ export const Container = styled.div`
             font-size: 16px;
 
             position: absolute;
-            right: 32px;
+            right: 16px;
             top: 18px;
 
             color: ${({ theme }) => theme.colors.primary.main};
