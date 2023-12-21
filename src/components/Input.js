@@ -25,4 +25,9 @@ export default styled.input`
             border-color:${theme.colors.danger.main};
         }
     `}
+
+    &:disabled {
+        background-color: ${({ theme }) => theme.colors.grey[100]};
+        border-color: ${({ theme }) => theme.colors.grey[200]};
+    }
 `;

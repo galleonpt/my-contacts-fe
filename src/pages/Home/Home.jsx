@@ -23,7 +23,7 @@ import emptyBox from '../../assets/images/empty-box.svg';
 import magnifierQuestion from '../../assets/images/magnifier-question.svg';
 
 import Loader from '../../components/Loader/Loader';
-import Button from '../../components/Button';
+import Button from '../../components/Button/Button';
 import ContactsService from '../../services/ContactsService';
 
 function Home() {
