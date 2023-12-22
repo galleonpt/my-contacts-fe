@@ -34,4 +34,4 @@ class EventManager {
   }
 }
 
-export default new EventManager();
+export default EventManager();
