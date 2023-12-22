@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import './lib/EventManager';
+
 import App from './components/App/App';
 
 ReactDOM.render(
