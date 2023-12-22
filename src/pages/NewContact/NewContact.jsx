@@ -1,6 +1,7 @@
 import ContactsServive from '../../services/ContactsService';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import ContactForm from '../../components/ContactForm/ContactForm';
+import toast from '../../utils/toast';
 
 function NewContact() {
   const handleSubmit = async (formData) => {
@@ -13,8 +14,16 @@ function NewContact() {
       };
 
       await ContactsServive.create(contact);
-    } catch (error) {
-      alert(error);
+
+      toast({
+        type: 'success',
+        text: 'Contact created successfully',
+      });
+    } catch {
+      toast({
+        type: 'danger',
+        text: 'Error creating contact',
+      });
     }
   };
 
