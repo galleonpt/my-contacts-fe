@@ -18,6 +18,7 @@ function NewContact() {
       toast({
         type: 'success',
         text: 'Contact created successfully',
+        duration: 3,
       });
     } catch {
       toast({
