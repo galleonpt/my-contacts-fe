@@ -15,6 +15,7 @@ const containerVariants = {
 export const Container = styled.div`
     padding: 16px 32px;
     border-radius: 4px;
+    cursor: pointer;
 
     color: #fff;
 
