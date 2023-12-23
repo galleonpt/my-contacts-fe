@@ -21,7 +21,7 @@ class EventManager {
     });
   }
 
-  removeLister(event, listenerToRemove) {
+  removeListener(event, listenerToRemove) {
     const eventListeners = this.listeners.get(event);
 
     if (!eventListeners) {
@@ -34,4 +34,4 @@ class EventManager {
   }
 }
 
-export default EventManager();
+export default EventManager;
