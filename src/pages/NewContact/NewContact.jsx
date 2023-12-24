@@ -1,4 +1,4 @@
-import ContactsServive from '../../services/ContactsService';
+import ContactsService from '../../services/ContactsService';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import ContactForm from '../../components/ContactForm/ContactForm';
 import toast from '../../utils/toast';
@@ -13,7 +13,7 @@ function NewContact() {
         category_id: formData.categoryId,
       };
 
-      await ContactsServive.create(contact);
+      await ContactsService.create(contact);
 
       toast({
         type: 'success',
