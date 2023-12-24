@@ -10,6 +10,7 @@ function Edit() {
   const { id } = useParams();
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
+  const [name, setName] = useState('');
   const formRef = useRef(null);
 
   //! handlers
@@ -25,6 +26,7 @@ function Edit() {
 
         setIsLoading(false);
         formRef.current.setFieldsValues(response);
+        setName(response.name);
       } catch (error) {
         history.push('/');
 
@@ -45,7 +47,7 @@ function Edit() {
       {isLoading && <Loader />}
 
       <PageHeader
-        title="Editar XPTO"
+        title={isLoading ? 'Loading...' : `Edit ${name}`}
       />
 
       <ContactForm
