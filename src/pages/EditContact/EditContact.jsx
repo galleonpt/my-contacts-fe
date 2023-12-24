@@ -14,8 +14,29 @@ function Edit() {
   const formRef = useRef(null);
 
   //! handlers
-  const handleSubmit = () => {
-    //
+  const handleSubmit = async (formData) => {
+    try {
+      const contact = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        category_id: formData.categoryId,
+      };
+
+      const response = await ContactsService.update(id, contact);
+      setName(response.name);
+
+      toast({
+        type: 'success',
+        text: 'Contact updated successfully',
+        duration: 3,
+      });
+    } catch {
+      toast({
+        type: 'danger',
+        text: 'Error updating contact',
+      });
+    }
   };
 
   // ! effects

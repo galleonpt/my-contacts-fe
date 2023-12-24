@@ -18,6 +18,12 @@ class ContactsService {
       body: payload,
     });
   }
+
+  update(id, payload) {
+    return this.httpClient.put(`/contacts/${id}`, {
+      body: payload,
+    });
+  }
 }
 
 export default new ContactsService();

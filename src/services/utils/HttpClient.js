@@ -20,6 +20,14 @@ class HttpClient {
     });
   }
 
+  put(endpoint, options) {
+    return this.makeRequest(endpoint, {
+      method: 'PUT',
+      body: options?.body,
+      headers: options?.headers,
+    });
+  }
+
   async makeRequest(endpoint, options) {
     const headers = new Headers();
 
