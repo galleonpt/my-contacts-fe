@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import ContactForm from '../../components/ContactForm/ContactForm';
@@ -10,6 +10,7 @@ function Edit() {
   const { id } = useParams();
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
+  const formRef = useRef(null);
 
   //! handlers
   const handleSubmit = () => {
@@ -23,7 +24,7 @@ function Edit() {
         const response = await ContactsService.getById(id);
 
         setIsLoading(false);
-        console.log(response);
+        formRef.current.setFieldsValues(response);
       } catch (error) {
         history.push('/');
 
@@ -48,6 +49,7 @@ function Edit() {
       />
 
       <ContactForm
+        ref={formRef}
         buttonLabel="Save changes"
         onSubmit={handleSubmit}
       />

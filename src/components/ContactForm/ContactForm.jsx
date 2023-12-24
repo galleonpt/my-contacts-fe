@@ -1,4 +1,6 @@
-import { useState, useEffect } from 'react';
+import {
+  useState, useEffect, forwardRef, useImperativeHandle,
+} from 'react';
 import PropTypes from 'prop-types';
 
 import useErrors from '../../hooks/useErrors';
@@ -14,7 +16,7 @@ import Select from '../Select';
 import Button from '../Button/Button';
 import { Form, ButtonContainer } from './styles';
 
-function ContactForm({ buttonLabel, onSubmit }) {
+const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -28,6 +30,15 @@ function ContactForm({ buttonLabel, onSubmit }) {
   } = useErrors();
 
   const isFormValid = (name && !errors.length);
+
+  useImperativeHandle(ref, () => ({
+    setFieldsValues: (contact) => {
+      setName(contact.name);
+      setEmail(contact.email);
+      setPhone(contact.phone);
+      setCategoryId(contact.category_id);
+    },
+  }), []);
 
   // ! handlers
   const handleNameChange = (event) => {
@@ -151,7 +162,7 @@ function ContactForm({ buttonLabel, onSubmit }) {
 
     </Form>
   );
-}
+});
 
 export default ContactForm;
 
