@@ -28,6 +28,13 @@ class HttpClient {
     });
   }
 
+  delete(endpoint, options) {
+    return this.makeRequest(endpoint, {
+      method: 'DELETE',
+      headers: options?.headers,
+    });
+  }
+
   async makeRequest(endpoint, options) {
     const headers = new Headers();
 

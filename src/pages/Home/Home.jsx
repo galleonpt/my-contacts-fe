@@ -27,6 +27,8 @@ import Button from '../../components/Button/Button';
 import Modal from '../../components/Modal/Modal';
 import ContactsService from '../../services/ContactsService';
 
+import toast from '../../utils/toast';
+
 function Home() {
   const [contacts, setContacts] = useState([]);
   const [orderBy, setOrderBy] = useState('asc');
@@ -35,6 +37,7 @@ function Home() {
   const [hasError, setHasError] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [contactToDelete, setContactToDelete] = useState(null);
+  const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
   const filteredContacts = useMemo(() => contacts.filter((contact) => (
     contact.name.toLowerCase().includes(searchName.toLowerCase())
@@ -75,6 +78,30 @@ function Home() {
 
   const handleCloseDeleteContact = () => {
     setIsDeleteModalOpen(false);
+    setContactToDelete(null);
+  };
+
+  const handleConfirmDeleteContact = async () => {
+    try {
+      setIsDeleteLoading(true);
+      await ContactsService.delete(contactToDelete.id);
+
+      setContacts((prev) => prev.filter((contact) => contact.id !== contactToDelete.id));
+
+      handleCloseDeleteContact();
+
+      toast({
+        type: 'success',
+        text: 'Contact deleted successfully',
+        duration: 3,
+      });
+    } catch {
+      toast({
+        type: 'danger',
+        text: 'Error deleting contact',
+        duration: 3,
+      });
+    } finally { setIsDeleteLoading(false); }
   };
 
   // ! effects
@@ -90,10 +117,11 @@ function Home() {
       <Modal
         danger
         open={isDeleteModalOpen}
+        isLoading={isDeleteLoading}
         title={`Are you sure you want to delete "${contactToDelete?.name}"?`}
         confirmLabel="Delete"
         onCancel={handleCloseDeleteContact}
-        onConfirm={() => { alert('confirm'); }}
+        onConfirm={handleConfirmDeleteContact}
       >
         <p>This action cannot be undone.</p>
       </Modal>

@@ -48,6 +48,10 @@ export const Footer = styled.footer`
         background: transparent;
         border: none;
         font-size: 16px;
-        color: ${({ theme }) => theme.colors.grey[200]}
+        color: ${({ theme }) => theme.colors.grey[200]};
+
+        &:disabled {
+            cursor: not-allowed;
+        }
     }
 `;
