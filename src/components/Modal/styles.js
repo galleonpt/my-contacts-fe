@@ -4,7 +4,7 @@ export const Overlay = styled.div`
     width: 100%;
     height: 100%;
 
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
 
@@ -27,13 +27,13 @@ export const Container = styled.div`
     background: #fff;
     box-shadow: rgba(0, 0, 0, 0.04);
 
-    h1 {
+    > h1 {
         font-size: 22px;
         color: ${({ theme, danger }) => (danger ? theme.colors.danger.main : theme.colors.grey[900])}
     }
 
-    p {
-        margin-top: 8px;
+    .body {
+        margin-top: 32px;
     }
 `;
 
@@ -42,7 +42,7 @@ export const Footer = styled.footer`
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 8px;
+    gap: 24px;
 
     .cancel_btn {
         background: transparent;

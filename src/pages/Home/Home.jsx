@@ -24,6 +24,7 @@ import magnifierQuestion from '../../assets/images/magnifier-question.svg';
 
 import Loader from '../../components/Loader/Loader';
 import Button from '../../components/Button/Button';
+import Modal from '../../components/Modal/Modal';
 import ContactsService from '../../services/ContactsService';
 
 function Home() {
@@ -74,6 +75,16 @@ function Home() {
   return (
     <Container>
       {isLoading && <Loader />}
+
+      <Modal
+        danger
+        title={"Are you sure you want to delete 'XPTO'?"}
+        confirmLabel="Delete"
+        onCancel={() => { alert('cancel'); }}
+        onConfirm={() => { alert('confirm'); }}
+      >
+        children data
+      </Modal>
 
       {contacts.length > 0 && (
         <InputSearchContainer>
