@@ -33,6 +33,8 @@ function Home() {
   const [searchName, setSearchName] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [contactToDelete, setContactToDelete] = useState(null);
 
   const filteredContacts = useMemo(() => contacts.filter((contact) => (
     contact.name.toLowerCase().includes(searchName.toLowerCase())
@@ -66,6 +68,15 @@ function Home() {
     fetchContacts();
   };
 
+  const handleDeleteContact = (contact) => {
+    setContactToDelete(contact);
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleCloseDeleteContact = () => {
+    setIsDeleteModalOpen(false);
+  };
+
   // ! effects
   useEffect(() => {
     fetchContacts();
@@ -78,12 +89,13 @@ function Home() {
 
       <Modal
         danger
-        title={"Are you sure you want to delete 'XPTO'?"}
+        open={isDeleteModalOpen}
+        title={`Are you sure you want to delete "${contactToDelete?.name}"?`}
         confirmLabel="Delete"
-        onCancel={() => { alert('cancel'); }}
+        onCancel={handleCloseDeleteContact}
         onConfirm={() => { alert('confirm'); }}
       >
-        children data
+        <p>This action cannot be undone.</p>
       </Modal>
 
       {contacts.length > 0 && (
@@ -180,7 +192,9 @@ function Home() {
                   <img src={edit} alt="Edit" />
                 </Link>
 
-                <button type="button"><img src={trash} alt="Delete" /></button>
+                <button type="button" onClick={() => handleDeleteContact(contact)}>
+                  <img src={trash} alt="Delete" />
+                </button>
               </div>
             </Card>
           ))}
