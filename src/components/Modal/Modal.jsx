@@ -1,7 +1,7 @@
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { Overlay, Container, Footer } from './styles';
 import Button from '../Button/Button';
+import ReactPortal from '../ReactPortal/ReactPortal';
 
 function Modal({
   danger,
@@ -14,41 +14,50 @@ function Modal({
   onCancel,
   onConfirm,
 }) {
+  let container = document.getElementById('modal-root');
+
+  if (!container) {
+    container = document.createElement('div');
+    container.setAttribute('id', 'modal-root');
+    document.body.appendChild(container);
+  }
+
   if (!open) {
     return null;
   }
 
-  return ReactDOM.createPortal(
-    <Overlay>
-      <Container danger={danger}>
-        <h1>{title}</h1>
+  return (
+    <ReactPortal containerId="modal-root">
+      <Overlay>
+        <Container danger={danger}>
+          <h1>{title}</h1>
 
-        <div className="body">
-          {children}
-        </div>
+          <div className="body">
+            {children}
+          </div>
 
-        <Footer>
-          <button
-            type="button"
-            className="cancel_btn"
-            disabled={isLoading}
-            onClick={onCancel}
-          >
-            {cancelLabel}
-          </button>
+          <Footer>
+            <button
+              type="button"
+              className="cancel_btn"
+              disabled={isLoading}
+              onClick={onCancel}
+            >
+              {cancelLabel}
+            </button>
 
-          <Button
-            type="button"
-            danger={danger}
-            isLoading={isLoading}
-            onClick={onConfirm}
-          >
-            {confirmLabel}
-          </Button>
-        </Footer>
-      </Container>
-    </Overlay>,
-    document.getElementById('modal-root'),
+            <Button
+              type="button"
+              danger={danger}
+              isLoading={isLoading}
+              onClick={onConfirm}
+            >
+              {confirmLabel}
+            </Button>
+          </Footer>
+        </Container>
+      </Overlay>
+    </ReactPortal>
   );
 }
 
