@@ -58,7 +58,7 @@ const useContactForm = (formRef, onSubmit) => {
 
     if (event.target.value && !isEmailValid(event.target.value)) {
       setError(
-        { field: 'email', message: 'Invalid email' },
+        { field: 'email', message: 'Invalid email!' },
       );
     } else {
       removeError('email');
