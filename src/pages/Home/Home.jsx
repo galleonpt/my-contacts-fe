@@ -8,7 +8,6 @@ import {
   Header,
   ListHeader,
   Card,
-  InputSearchContainer,
   ErrorContainer,
   EmptyListContainer,
   SearchNotFoundContainer,
@@ -24,6 +23,7 @@ import Loader from '../../components/Loader/Loader';
 import Button from '../../components/Button/Button';
 import Modal from '../../components/Modal/Modal';
 import useHome from './useHome';
+import InputSearch from './components/InputSearch/InputSearch';
 
 function Home() {
   const {
@@ -51,27 +51,8 @@ function Home() {
     <Container>
       {isLoading && <Loader />}
 
-      <Modal
-        danger
-        open={isDeleteModalOpen}
-        isLoading={isDeleteLoading}
-        title={`Are you sure you want to delete "${contactToDelete?.name}"?`}
-        confirmLabel="Delete"
-        onCancel={handleCloseDeleteContact}
-        onConfirm={handleConfirmDeleteContact}
-      >
-        <p>This action cannot be undone.</p>
-      </Modal>
-
       {contacts.length > 0 && (
-        <InputSearchContainer>
-          <input
-            value={searchName}
-            type="text"
-            placeholder="Search contact by name ..."
-            onChange={handleChangeSearchName}
-          />
-        </InputSearchContainer>
+        <InputSearch value={searchName} onChange={handleChangeSearchName} />
       )}
 
       <Header
@@ -163,6 +144,18 @@ function Home() {
               </div>
             </Card>
           ))}
+
+          <Modal
+            danger
+            open={isDeleteModalOpen}
+            isLoading={isDeleteLoading}
+            title={`Are you sure you want to delete "${contactToDelete?.name}"?`}
+            confirmLabel="Delete"
+            onCancel={handleCloseDeleteContact}
+            onConfirm={handleConfirmDeleteContact}
+          >
+            <p>This action cannot be undone.</p>
+          </Modal>
         </>
       )}
 
