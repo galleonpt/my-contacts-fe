@@ -5,36 +5,6 @@ export const Container = styled.div`
     position: relative;
 `;
 
-export const Header = styled.header`
-    display: flex;
-    align-items: center;
-    justify-content: ${({ justifyContent }) => justifyContent};
-    margin-top: 32px;
-    border-bottom: 2px solid ${({ theme }) => theme.colors.grey[100]};
-    padding-bottom: 16px;
-
-
-    strong {
-        font-size: 24px;
-    }
-
-    a {
-        color: ${({ theme }) => theme.colors.primary.main};
-        text-decoration: none;
-        font-weight: bold;
-
-        padding: 8px 16px;
-        border: 2px solid ${({ theme }) => theme.colors.primary.main};
-        border-radius: 4px;
-        transition: all .2s ease-in;
-
-        &:hover {
-            background: ${({ theme }) => theme.colors.primary.main};
-            color: #fff
-        }
-    }
-`;
-
 export const ListHeader = styled.header`
     margin-top: 24px;
     margin-bottom: 8px;

@@ -5,7 +5,6 @@
 import { Link } from 'react-router-dom';
 import {
   Container,
-  Header,
   ListHeader,
   Card,
   ErrorContainer,
@@ -24,6 +23,7 @@ import Button from '../../components/Button/Button';
 import Modal from '../../components/Modal/Modal';
 import useHome from './useHome';
 import InputSearch from './components/InputSearch/InputSearch';
+import Header from './components/Header/Header';
 
 function Home() {
   const {
@@ -56,22 +56,10 @@ function Home() {
       )}
 
       <Header
-        justifyContent={
-            hasError
-              ? 'flex-end'
-              : contacts.length > 0
-                ? 'space-between'
-                : 'center'
-        }
-      >
-        {!hasError && contacts.length > 0 && (
-        <strong>
-          {filteredContacts.length}
-          {filteredContacts.length === 1 ? ' contact' : ' contacts'}
-        </strong>
-        )}
-        <Link to="/new">New contact</Link>
-      </Header>
+        hasError={hasError}
+        contactsLength={contacts.length}
+        filteredContactsLength={filteredContacts.length}
+      />
 
       {hasError && (
         <ErrorContainer>
