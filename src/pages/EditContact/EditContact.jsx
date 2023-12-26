@@ -45,8 +45,8 @@ function Edit() {
       try {
         const response = await ContactsService.getById(id);
 
-        setIsLoading(false);
         formRef.current.setFieldsValues(response);
+        setIsLoading(false);
         setName(response.name);
       } catch (error) {
         history.push('/');
