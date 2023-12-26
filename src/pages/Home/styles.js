@@ -78,39 +78,6 @@ export const Card = styled.div`
     }
 `;
 
-export const ErrorContainer = styled.div`
-    margin-top: 16px;
-    display: flex;
-    align-items: center;
-    gap: 24px;
-
-    .details {
-        strong {
-            display: block;
-            font-size: 22px;
-            color: ${({ theme }) => theme.colors.danger.main};
-            margin-bottom: 8px
-        }
-    }
-`;
-
-export const EmptyListContainer = styled.div`
-    margin-top: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    p {
-        color: ${({ theme }) => theme.colors.grey[200]};
-        text-align: center;
-        margin-top: 8px;
-
-        strong {
-            color: ${({ theme }) => theme.colors.primary.main};
-        }
-    }
-`;
-
 export const SearchNotFoundContainer = styled.div`
     margin-top: 16px;
     display: flex;

@@ -1,29 +1,22 @@
-/* eslint-disable react/jsx-one-expression-per-line */
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable no-nested-ternary */
-
 import { Link } from 'react-router-dom';
 import {
   Container,
   ListHeader,
   Card,
-  ErrorContainer,
-  EmptyListContainer,
   SearchNotFoundContainer,
 } from './styles';
 import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
-import sad from '../../assets/images/sad.svg';
-import emptyBox from '../../assets/images/empty-box.svg';
 import magnifierQuestion from '../../assets/images/magnifier-question.svg';
 
 import Loader from '../../components/Loader/Loader';
-import Button from '../../components/Button/Button';
 import Modal from '../../components/Modal/Modal';
 import useHome from './useHome';
 import InputSearch from './components/InputSearch/InputSearch';
 import Header from './components/Header/Header';
+import ErrorStatus from './components/ErrorStatus/ErrorStatus';
+import EmptyList from './components/EmptyList/EmptyList';
 
 function Home() {
   const {
@@ -61,41 +54,24 @@ function Home() {
         filteredContactsLength={filteredContacts.length}
       />
 
-      {hasError && (
-        <ErrorContainer>
-          <img src={sad} alt="sad" />
-
-          <div className="details">
-            <strong>Error getting your contacts!</strong>
-
-            <Button type="button" onClick={handleTryAgain}>
-              Try again
-            </Button>
-          </div>
-        </ErrorContainer>
-      )}
+      {hasError && <ErrorStatus onTryAgain={handleTryAgain} />}
 
       {!hasError && (
         <>
           {contacts.length === 0 && !isLoading && (
-          <EmptyListContainer>
-            <img src={emptyBox} alt="empty-box" />
-
-            <div>
-              <p>
-                You don't have any registered contacts yet!
-                Click on the <strong>“New Contact”</strong>
-                button at the top to register your first one!
-              </p>
-            </div>
-          </EmptyListContainer>
+            <EmptyList />
           )}
 
           {contacts.length > 0 && filteredContacts.length === 0 && (
           <SearchNotFoundContainer>
             <img src={magnifierQuestion} alt="magnifier-question" />
 
-            <span>No results were found for <strong>{searchName}</strong>.</span>
+            <span>
+              No results were found for
+              {' '}
+              <strong>{searchName}</strong>
+              .
+            </span>
           </SearchNotFoundContainer>
           )}
 
