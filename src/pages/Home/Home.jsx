@@ -33,9 +33,9 @@ function Home() {
     hasError,
 
     contacts,
+    filteredContacts,
     contactToDelete,
     searchName,
-    filteredContacts,
     orderBy,
 
     handleCloseDeleteContact,
