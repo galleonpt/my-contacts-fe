@@ -5,6 +5,7 @@ import ContactForm from '../../components/ContactForm/ContactForm';
 import ContactsService from '../../services/ContactsService';
 import Loader from '../../components/Loader/Loader';
 import toast from '../../utils/toast';
+import useSafeAsyncAction from '../../hooks/useSafeAsyncAction';
 
 function Edit() {
   const { id } = useParams();
@@ -12,6 +13,7 @@ function Edit() {
   const [isLoading, setIsLoading] = useState(true);
   const [name, setName] = useState('');
   const formRef = useRef(null);
+  const safeAsyncAction = useSafeAsyncAction();
 
   //! handlers
   const handleSubmit = async (formData) => {
@@ -45,22 +47,26 @@ function Edit() {
       try {
         const response = await ContactsService.getById(id);
 
-        formRef.current.setFieldsValues(response);
-        setIsLoading(false);
-        setName(response.name);
+        safeAsyncAction(() => {
+          formRef.current.setFieldsValues(response);
+          setIsLoading(false);
+          setName(response.name);
+        });
       } catch (error) {
-        history.push('/');
+        safeAsyncAction(() => {
+          history.push('/');
 
-        toast({
-          type: 'danger',
-          text: error.message,
-          duration: 3,
+          toast({
+            type: 'danger',
+            text: error.message,
+            duration: 3,
+          });
         });
       } finally { setIsLoading(false); }
     }
 
     fetchContact();
-  }, [id, history]);
+  }, [id, history, safeAsyncAction]);
 
   // ! render
   return (
