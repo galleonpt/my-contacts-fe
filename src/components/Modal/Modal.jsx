@@ -14,14 +14,6 @@ function Modal({
   onCancel,
   onConfirm,
 }) {
-  let container = document.getElementById('modal-root');
-
-  if (!container) {
-    container = document.createElement('div');
-    container.setAttribute('id', 'modal-root');
-    document.body.appendChild(container);
-  }
-
   if (!open) {
     return null;
   }
