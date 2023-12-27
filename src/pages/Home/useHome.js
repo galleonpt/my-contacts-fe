@@ -55,7 +55,6 @@ const useHome = () => {
 
   const handleCloseDeleteContact = () => {
     setIsDeleteModalOpen(false);
-    setContactToDelete(null);
   };
 
   const handleConfirmDeleteContact = async () => {
