@@ -53,9 +53,9 @@ export const Container = styled.div`
 
     gap: 8px;
 
-    animation: ${messageIn} .3s;
+    animation: ${messageIn} .3s forwards;
 
-    ${({ isLeaving }) => isLeaving && css`animation: ${messageOut} 0.2s;`}
+    ${({ isLeaving }) => isLeaving && css`animation: ${messageOut} 0.2s forwards;`}
 
     & + & {
         margin-top: 12px;

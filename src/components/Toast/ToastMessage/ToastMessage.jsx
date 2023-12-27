@@ -39,7 +39,7 @@ function ToastMessage({
       ref={animatedRef}
     >
       {type === 'danger' && <img src={xCircleIcon} alt="X" />}
-      {type === 'success' && <img src={checkCircleIcon} alt="X" />}
+      {type === 'success' && <img src={checkCircleIcon} alt="check" />}
       <strong>{text}</strong>
     </Container>
   );
