@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import { Container } from './styles';
 
@@ -45,7 +45,7 @@ function ToastMessage({
   );
 }
 
-export default ToastMessage;
+export default memo(ToastMessage);
 
 ToastMessage.propTypes = {
   message: PropTypes.shape({
