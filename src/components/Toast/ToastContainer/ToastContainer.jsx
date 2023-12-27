@@ -7,7 +7,6 @@ import useAnimatedList from '../../../hooks/useAnimatedList';
 function ToastContainer() {
   const {
     setItems: setMessages,
-    handleAnimationEnd,
     handleRemoveItem: handleRemoveMessage,
     renderList,
   } = useAnimatedList();
@@ -33,13 +32,13 @@ function ToastContainer() {
   // ! render
   return (
     <Container>
-      {renderList((message, { isLeaving }) => (
+      {renderList((message, { isLeaving, animatedRef }) => (
         <ToastMessage
           key={message.id}
           message={message}
           isLeaving={isLeaving}
           onRemoveMessage={handleRemoveMessage}
-          onAnimationEnd={handleAnimationEnd}
+          animatedRef={animatedRef}
         />
       ))}
     </Container>
