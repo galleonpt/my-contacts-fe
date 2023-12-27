@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Overlay, Container, Footer } from './styles';
 import Button from '../Button/Button';
 import ReactPortal from '../ReactPortal/ReactPortal';
-import useAnimatedUnmount from '../../hooks/useUnimatedUnmount';
+import useAnimatedUnmount from '../../hooks/useAnimatedUnmount';
 
 function Modal({
   danger,

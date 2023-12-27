@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
-const useAnimatedUnmount = (open) => {
-  const [shouldRender, setShouldRender] = useState(open);
+const useAnimatedUnmount = (visible) => {
+  const [shouldRender, setShouldRender] = useState(visible);
   const animatedElementRef = useRef(null);
 
   // ! effects
@@ -10,12 +10,12 @@ const useAnimatedUnmount = (open) => {
       setShouldRender(false);
     };
 
-    if (open) {
+    if (visible) {
       setShouldRender(true);
     }
 
     const elementRef = animatedElementRef.current;
-    if (!open && elementRef) {
+    if (!visible && elementRef) {
       elementRef.addEventListener('animationend', handleAnimationEnd);
     }
 
@@ -24,7 +24,7 @@ const useAnimatedUnmount = (open) => {
         elementRef.removeEventListener('animationend', handleAnimationEnd);
       }
     };
-  }, [open]);
+  }, [visible]);
 
   return { shouldRender, animatedElementRef };
 };

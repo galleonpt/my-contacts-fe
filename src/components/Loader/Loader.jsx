@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Overlay } from './styles';
 import Spinner from '../Spinner/Spinner';
 import ReactPortal from '../ReactPortal/ReactPortal';
-import useAnimatedUnmount from '../../hooks/useUnimatedUnmount';
+import useAnimatedUnmount from '../../hooks/useAnimatedUnmount';
 
 function Loader({ isLoading }) {
   const { shouldRender, animatedElementRef } = useAnimatedUnmount(isLoading);
