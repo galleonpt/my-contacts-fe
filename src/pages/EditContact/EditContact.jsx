@@ -11,7 +11,7 @@ function Edit() {
   // ! render
   return (
     <>
-      {isLoading && <Loader />}
+      <Loader isLoading={isLoading} />
 
       <PageHeader
         title={isLoading ? 'Loading...' : `Edit ${name}`}

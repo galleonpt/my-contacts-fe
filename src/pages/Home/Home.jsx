@@ -38,7 +38,8 @@ function Home() {
   // ! render
   return (
     <Container>
-      {isLoading && <Loader />}
+
+      <Loader isLoading={isLoading} />
 
       {hasContacts && (
         <InputSearch value={searchName} onChange={handleChangeSearchName} />
