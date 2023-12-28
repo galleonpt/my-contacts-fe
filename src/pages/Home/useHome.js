@@ -1,5 +1,5 @@
 import {
-  useEffect, useState, useMemo, useCallback,
+  useEffect, useState, useMemo, useCallback, useDeferredValue,
 } from 'react';
 import ContactsService from '../../services/ContactsService';
 
@@ -15,9 +15,11 @@ const useHome = () => {
   const [contactToDelete, setContactToDelete] = useState(null);
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
+  const deferredSearchName = useDeferredValue(searchName);
+
   const filteredContacts = useMemo(() => contacts.filter((contact) => (
-    contact.name.toLowerCase().includes(searchName.toLowerCase())
-  )), [searchName, contacts]);
+    contact.name.toLowerCase().includes(deferredSearchName.toLowerCase())
+  )), [contacts, deferredSearchName]);
 
   // ! handlers
   const fetchContacts = useCallback(async () => {
@@ -36,9 +38,9 @@ const useHome = () => {
     }
   }, [orderBy]);
 
-  const handleToggleOrderBy = () => {
+  const handleToggleOrderBy = useCallback(() => {
     setOrderBy((prev) => (prev === 'asc' ? 'desc' : 'asc'));
-  };
+  }, []);
 
   const handleChangeSearchName = (event) => {
     setSearchName(event.target.value);
@@ -48,10 +50,10 @@ const useHome = () => {
     fetchContacts();
   };
 
-  const handleDeleteContact = (contact) => {
+  const handleDeleteContact = useCallback((contact) => {
     setContactToDelete(contact);
     setIsDeleteModalOpen(true);
-  };
+  }, []);
 
   const handleCloseDeleteContact = () => {
     setIsDeleteModalOpen(false);

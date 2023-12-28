@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   ListHeader,
   Card,
@@ -53,7 +54,7 @@ function ContactsList({
   );
 }
 
-export default ContactsList;
+export default memo(ContactsList);
 
 ContactsList.propTypes = {
   filteredContacts: PropTypes.arrayOf(PropTypes.shape({
