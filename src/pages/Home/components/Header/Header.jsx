@@ -11,7 +11,7 @@ function Header({ hasError, contactsLength, filteredContactsLength }) {
       : 'center';
 
   return (
-    <Container justifyContent={alignement}>
+    <Container $justifyContent={alignement}>
       {!hasError && contactsLength > 0 && (
       <strong>
         {filteredContactsLength}
