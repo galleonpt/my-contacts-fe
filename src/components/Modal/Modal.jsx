@@ -24,8 +24,8 @@ function Modal({
 
   return (
     <ReactPortal containerId="modal-root">
-      <Overlay isLeaving={!open} ref={animatedElementRef}>
-        <Container danger={danger} isLeaving={!open}>
+      <Overlay $isLeaving={!open} ref={animatedElementRef}>
+        <Container $danger={danger} $isLeaving={!open}>
           <h1>{title}</h1>
 
           <div className="body">

@@ -35,7 +35,7 @@ function ToastMessage({
       onClick={handleRemoveToast}
       tabIndex={0}
       role="button"
-      isLeaving={isLeaving}
+      $isLeaving={isLeaving}
       ref={animatedRef}
     >
       {type === 'danger' && <img src={xCircleIcon} alt="X" />}

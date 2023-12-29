@@ -55,7 +55,7 @@ export const Container = styled.div`
 
     animation: ${messageIn} .3s forwards;
 
-    ${({ isLeaving }) => isLeaving && css`animation: ${messageOut} 0.2s forwards;`}
+    ${({ $isLeaving }) => $isLeaving && css`animation: ${messageOut} 0.2s forwards;`}
 
     & + & {
         margin-top: 12px;
