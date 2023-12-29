@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ContactsService from '../../services/ContactsService';
 import toast from '../../utils/toast';
 import useSafeAsyncAction from '../../hooks/useSafeAsyncAction';
 
 const useEditContact = () => {
   const { id } = useParams();
-  const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
   const [name, setName] = useState('');
   const formRef = useRef(null);
@@ -50,8 +49,6 @@ const useEditContact = () => {
         }
 
         safeAsyncAction(() => {
-          history.push('/');
-
           toast({
             type: 'danger',
             text: 'Contact not found!',
@@ -66,7 +63,7 @@ const useEditContact = () => {
     return () => {
       controller.abort();
     };
-  }, [id, history, safeAsyncAction]);
+  }, [id, safeAsyncAction]);
 
   return {
     isLoading, name, formRef, handleSubmit,

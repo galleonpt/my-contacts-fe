@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import defaultTheme from '../../assets/styles/themes/default';
 import GlobalStyles from '../../assets/styles/global';
 
-import Routes from '../../routes';
+import Router from '../../router';
 
 import Header from '../Header/Header';
 import ToastContainer from '../Toast/ToastContainer/ToastContainer';
@@ -19,7 +19,7 @@ function App() {
 
         <Container>
           <Header />
-          <Routes />
+          <Router />
         </Container>
       </ThemeProvider>
     </BrowserRouter>
