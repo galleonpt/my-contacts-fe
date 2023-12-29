@@ -7,7 +7,7 @@ function Button({
 }) {
   return (
     <StyledButton
-      danger={danger}
+      $danger={danger}
       type={type}
       disabled={disabled || isLoading}
       onClick={onClick}
