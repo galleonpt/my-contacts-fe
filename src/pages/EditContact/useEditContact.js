@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import ContactsService from '../../services/ContactsService';
 import toast from '../../utils/toast';
 import useSafeAsyncAction from '../../hooks/useSafeAsyncAction';
@@ -10,6 +10,8 @@ const useEditContact = () => {
   const [name, setName] = useState('');
   const formRef = useRef(null);
   const safeAsyncAction = useSafeAsyncAction();
+
+  const navigate = useNavigate();
 
   //! handlers
   const handleSubmit = async (contact) => {
@@ -49,6 +51,7 @@ const useEditContact = () => {
         }
 
         safeAsyncAction(() => {
+          navigate('/');
           toast({
             type: 'danger',
             text: 'Contact not found!',
@@ -63,7 +66,7 @@ const useEditContact = () => {
     return () => {
       controller.abort();
     };
-  }, [id, safeAsyncAction]);
+  }, [id, safeAsyncAction, navigate]);
 
   return {
     isLoading, name, formRef, handleSubmit,
