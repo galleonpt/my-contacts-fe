@@ -33,9 +33,11 @@ const useEditContact = () => {
 
   // ! effects
   useEffect(() => {
+    const controller = new AbortController();
+
     async function fetchContact() {
       try {
-        const response = await ContactsService.getById(id);
+        const response = await ContactsService.getById(id, controller.signal);
 
         safeAsyncAction(() => {
           formRef.current.setFieldsValues(response);
@@ -43,12 +45,16 @@ const useEditContact = () => {
           setName(response.name);
         });
       } catch (error) {
+        if (error instanceof DOMException && error.name === 'AbortError') {
+          return;
+        }
+
         safeAsyncAction(() => {
           history.push('/');
 
           toast({
             type: 'danger',
-            text: error.message,
+            text: 'Contact not found!',
             duration: 3,
           });
         });
@@ -56,6 +62,10 @@ const useEditContact = () => {
     }
 
     fetchContact();
+
+    return () => {
+      controller.abort();
+    };
   }, [id, history, safeAsyncAction]);
 
   return {

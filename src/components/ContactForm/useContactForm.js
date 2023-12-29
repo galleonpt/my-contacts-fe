@@ -82,10 +82,11 @@ const useContactForm = (formRef, onSubmit) => {
 
   // ! effects
   useEffect(() => {
+    const controller = new AbortController();
     async function fetchCategories() {
       try {
         setIsLoadingCategories(true);
-        const categoriesList = await CategoriesService.list();
+        const categoriesList = await CategoriesService.list(controller.signal);
         setCategories(categoriesList);
       } catch {} finally {
         setIsLoadingCategories(false);
@@ -93,6 +94,10 @@ const useContactForm = (formRef, onSubmit) => {
     }
 
     fetchCategories();
+
+    return () => {
+      controller.abort();
+    };
   }, [setCategories, setIsLoadingCategories]);
 
   return {

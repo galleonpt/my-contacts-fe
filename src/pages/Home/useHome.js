@@ -22,15 +22,19 @@ const useHome = () => {
   )), [contacts, deferredSearchName]);
 
   // ! handlers
-  const fetchContacts = useCallback(async () => {
+  const fetchContacts = useCallback(async (signal) => {
     try {
       setIsLoading(true);
 
-      const contactsList = await ContactsService.list(orderBy);
+      const contactsList = await ContactsService.list(orderBy, signal);
 
       setContacts(contactsList);
       setHasError(false);
-    } catch {
+    } catch (error) {
+      if (error instanceof DOMException && error.name === 'AbortError') {
+        return;
+      }
+
       setHasError(true);
       setContacts([]);
     } finally {
@@ -84,7 +88,12 @@ const useHome = () => {
 
   // ! effects
   useEffect(() => {
-    fetchContacts();
+    const controller = new AbortController();
+    fetchContacts(controller.signal);
+
+    return () => {
+      controller.abort();
+    };
   }, [orderBy, fetchContacts]);
 
   return {

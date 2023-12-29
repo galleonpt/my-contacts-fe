@@ -9,6 +9,7 @@ class HttpClient {
     return this.makeRequest(endpoint, {
       method: 'GET',
       headers: options?.headers,
+      signal: options?.signal,
     });
   }
 
@@ -52,6 +53,7 @@ class HttpClient {
       method: options.method,
       headers,
       body: JSON.stringify(options.body),
+      signal: options.signal,
     });
 
     let responseBody = null;
