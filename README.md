@@ -20,21 +20,25 @@
 To install and run this project you should tun the commands below:
 
 - **Clone this repo**
+
 ```bash
   git clone git@github.com:galleonpt/my-contacts-fe.git
 ```
 
 - **Navigate to the project directory**
+
 ```bash
   cd my-contacts-fe
 ```
 
 - **Install the dependencies**
+
 ```bash
   npm install
 ```
 
 - **Start the app**
+
 ```bash
   npm run start
 ```
